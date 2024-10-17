@@ -6,6 +6,11 @@ public class ProjectTitle : MonoBehaviour
 {
     float speed = 5.0f;
     public LayerMask collisionMask;
+
+    float damage =  1.0f;
+
+
+
     public void SetSpeed(float newSpeed){
         speed = newSpeed;
     }
@@ -33,7 +38,10 @@ public class ProjectTitle : MonoBehaviour
     }
 
     void OnHitObject(RaycastHit hit){
-        print(hit.collider.gameObject.name);
-        GameObject.Destroy(hit.collider.gameObject);
+        IDamageable  damageableObject = hit.collider.GetComponent<IDamageable> ();
+        if (damageableObject != null){
+            damageableObject.TakeHit(damage, hit);
+        }
+        GameObject.Destroy(gameObject);
     }
 }
