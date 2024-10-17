@@ -506,13 +506,13 @@ namespace UnityEngine.UI
         {
             get
             {
-                var components = ListPool<Component>.Get();
-                GetComponents(typeof(IMaterialModifier), components);
+                var components = ListPool<IMaterialModifier>.Get();
+                GetComponents<IMaterialModifier>(components);
 
                 var currentMat = material;
                 for (var i = 0; i < components.Count; i++)
                     currentMat = (components[i] as IMaterialModifier).GetModifiedMaterial(currentMat);
-                ListPool<Component>.Release(components);
+                ListPool<IMaterialModifier>.Release(components);
                 return currentMat;
             }
         }
@@ -745,7 +745,6 @@ namespace UnityEngine.UI
                 {
                     s_Mesh = new Mesh();
                     s_Mesh.name = "Shared UI Mesh";
-                    s_Mesh.hideFlags = HideFlags.HideAndDontSave;
                 }
                 return s_Mesh;
             }

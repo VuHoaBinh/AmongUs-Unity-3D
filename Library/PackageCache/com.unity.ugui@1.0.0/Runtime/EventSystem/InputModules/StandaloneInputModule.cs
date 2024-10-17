@@ -24,6 +24,8 @@ namespace UnityEngine.EventSystems
 
         private PointerEventData m_InputPointerEvent;
 
+        private const float doubleClickTime = 0.3f;
+
         protected StandaloneInputModule()
         {
         }
@@ -347,6 +349,12 @@ namespace UnityEngine.EventSystems
                     pointerEvent.pointerEnter = currentOverGo;
                 }
 
+                var resetDiffTime = Time.unscaledTime - pointerEvent.clickTime;
+                if (resetDiffTime >= doubleClickTime)
+                {
+                    pointerEvent.clickCount = 0;
+                }
+
                 // search for the control that will receive the press
                 // if we can't find a press handler set the press
                 // handler to be what would receive a click.
@@ -365,7 +373,7 @@ namespace UnityEngine.EventSystems
                 if (newPressed == pointerEvent.lastPress)
                 {
                     var diffTime = time - pointerEvent.clickTime;
-                    if (diffTime < 0.3f)
+                    if (diffTime < doubleClickTime)
                         ++pointerEvent.clickCount;
                     else
                         pointerEvent.clickCount = 1;
@@ -590,6 +598,12 @@ namespace UnityEngine.EventSystems
 
                 DeselectIfSelectionChanged(currentOverGo, pointerEvent);
 
+                var resetDiffTime = Time.unscaledTime - pointerEvent.clickTime;
+                if (resetDiffTime >= doubleClickTime)
+                {
+                    pointerEvent.clickCount = 0;
+                }
+
                 // search for the control that will receive the press
                 // if we can't find a press handler set the press
                 // handler to be what would receive a click.
@@ -607,7 +621,7 @@ namespace UnityEngine.EventSystems
                 if (newPressed == pointerEvent.lastPress)
                 {
                     var diffTime = time - pointerEvent.clickTime;
-                    if (diffTime < 0.3f)
+                    if (diffTime < doubleClickTime)
                         ++pointerEvent.clickCount;
                     else
                         pointerEvent.clickCount = 1;

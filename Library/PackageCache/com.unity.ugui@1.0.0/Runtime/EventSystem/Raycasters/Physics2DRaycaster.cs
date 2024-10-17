@@ -90,7 +90,7 @@ namespace UnityEngine.EventSystems
                     {
                         gameObject = m_Hits[b].collider.gameObject,
                         module = this,
-                        distance = Vector3.Distance(eventCamera.transform.position, m_Hits[b].point),
+                        distance = m_Hits[b].distance,
                         worldPosition = m_Hits[b].point,
                         worldNormal = m_Hits[b].normal,
                         screenPosition = eventData.position,
