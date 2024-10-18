@@ -35,14 +35,14 @@ public class Spawner : MonoBehaviour
     }
 
     void NextWave(){
-        if(currentWaveNumber-1< waves.Length){
+        if(currentWaveNumber < waves.Length){
+            currentWave = waves[currentWaveNumber];
             currentWaveNumber++;
-            currentWave=waves[currentWaveNumber-1];
-            enemiesRemainingToSpawn=currentWave.enemyCount;
+            enemiesRemainingToSpawn = currentWave.enemyCount;
+            enemiesRemainingALive = enemiesRemainingToSpawn;
         }
-
-        enemiesRemainingALive=enemiesRemainingToSpawn;
     }
+
 
     [System.Serializable]
     public class Wave{
