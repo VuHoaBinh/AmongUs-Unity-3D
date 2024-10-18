@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class LivingEntity : MonoBehaviour, IDamageable
 {
-    public float stayingHealth;
     protected float health;
     protected bool dead;
-
-    protected virtual void Start(){
-        health = stayingHealth;
+    public float startingHealth=10;
+    public event System.Action OnDeath;
+    public float GetHealth(){
+        return health;
     }
-    public void TakeHit(float damage, RaycastHit hit)
-    {
+    protected virtual void Start()
+    { 
+        health = startingHealth;
+    }
+
+    public void TakeDamage(float damage){
         health -= damage;
-        if (health <= 0 && !dead){
+        if(health <= 0 && !dead){
             Die();
         }
-        
     }
-    protected void Die(){
+
+    public void TakeHit(float damage, RaycastHit hit){
+        TakeDamage(damage);
+    }
+
+    public void Die(){
         dead = true;
         GameObject.Destroy(gameObject);
+        if(OnDeath!= null){
+            OnDeath();
+        }
+        
     }
 }

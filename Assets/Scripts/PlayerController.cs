@@ -5,23 +5,27 @@ using UnityEngine;
 // [RequireComponent ( typeof (RigidBody))]
 public class PlayerController : MonoBehaviour
 {
+     Rigidbody myRigidbody;
     Vector3 velocity;
-    Rigidbody  myRigidBody;
+
+    // Start is called before the first frame update
     void Start()
     {
-        myRigidBody = GetComponent<Rigidbody >();
+        myRigidbody = GetComponent<Rigidbody>();
+    }
+
+    public void Move(Vector3 _velocity)
+    {
+        velocity = _velocity;
     }
 
     public void LookAt(Vector3 lookPoint){
-        Vector3 heightCorrectedPoint = new Vector3(lookPoint.x,transform.position.y, lookPoint.z);
-        // transform.LookAt(lookPoint);
-        transform.LookAt(heightCorrectedPoint);
-
+        Vector3 correctPoint=new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
+        transform.LookAt(correctPoint);
     }
-    public void Move(Vector3 _velocity){
-        velocity = _velocity;
-    }
-    void FixedUpdate(){
-        myRigidBody.MovePosition(myRigidBody.position + velocity* Time.fixedDeltaTime);
+    // Update is called once per frame
+    void Update()
+    {
+        myRigidbody.MovePosition(myRigidbody.position+velocity*Time.deltaTime);
     }
 }
