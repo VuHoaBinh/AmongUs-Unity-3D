@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
             nextShotTime = Time.time + msBetweenShots / 1000;
             ProjectTitle newProjectile = Instantiate(projectTitle, muzzle.position, muzzle.rotation) as ProjectTitle;
             newProjectile.SetSpeed(muzzleVelocity);
+            Destroy(newProjectile, 5f);
         }
     }
 }

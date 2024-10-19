@@ -9,6 +9,7 @@ public class ProjectTitle : MonoBehaviour
     float damage =1;
     public float life=2;
     float skinWidth =.1f;
+
     // Start is called before the first frame update
     
     void Start(){
