@@ -27,12 +27,13 @@ public class LivingEntity : MonoBehaviour, IDamageable
         TakeDamage(damage);
     }
 
+    [ContextMenu("Self Destruct")]   
     public void Die(){
         dead = true;
-        GameObject.Destroy(gameObject);
         if(OnDeath!= null){
             OnDeath();
         }
+        GameObject.Destroy(gameObject);
         
     }
 }

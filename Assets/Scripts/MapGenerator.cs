@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MapGenerator : MonoBehaviour {
-	
 	public Map[] maps;
 	public int mapIndex;
 	
@@ -24,7 +23,12 @@ public class MapGenerator : MonoBehaviour {
 	
 	Map currentMap;
 	
-	void Start() {
+	void Awake() {
+		FindObjectOfType<Spawner> ().OnNewWave += OnNewWave;
+	}
+
+	void OnNewWave(int waveNumber) {
+		mapIndex = waveNumber - 1;
 		GenerateMap ();
 	}
 
