@@ -24,7 +24,11 @@ public class Enemy : LivingEntity {
 	float targetCollisionRadius;
 
 	bool hasTarget;
-	
+
+	// Game effects
+	public ParticleSystem deathEffect;	
+
+
 	protected override void Start () {
 		base.Start ();
 		pathfinder = GetComponent<NavMeshAgent> ();
@@ -51,6 +55,12 @@ public class Enemy : LivingEntity {
 		currentState = State.Idle;
 	}
 
+	public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {
+		if (damage >= health) {
+			Destroy(Instantiate (deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward ,hitDirection)) as GameObject, deathEffect.startLifetime);
+		}
+		base.TakeHit (damage, hitPoint, hitDirection);
+	}
 	void Update () {
 
 		if (hasTarget) {
