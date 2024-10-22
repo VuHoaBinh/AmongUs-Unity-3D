@@ -96,6 +96,7 @@ Transform:
   m_Children:
   - {fileID: 762820529126162364}
   - {fileID: 2499619088345396840}
+  - {fileID: 8800846083520823312}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,6 +116,8 @@ MonoBehaviour:
   projectTitle: {fileID: 4387647414400200719, guid: 0e0638757215c8d4a95f6cd52b766810, type: 3}
   msBetweenShots: 100
   muzzleVelocity: 35
+  shell: {fileID: 6595876428213988718, guid: ff40bbaa6ceffa748a673e403d664886, type: 3}
+  shellEjection: {fileID: 8800846083520823312}
 --- !u!1 &2381254727975028688
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +312,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7495611919727055599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8800846083520823312}
+  m_Layer: 0
+  m_Name: shell ejection point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8800846083520823312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495611919727055599}
+  m_LocalRotation: {x: -0, y: -0, z: 0.280359, w: 0.9598952}
+  m_LocalPosition: {x: 0.092999995, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4555748255622940221}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 32.563}
 --- !u!1 &8912677015134901097
 GameObject:
   m_ObjectHideFlags: 0
