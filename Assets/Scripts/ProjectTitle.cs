@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ProjectTitle : MonoBehaviour
 {
-     public LayerMask collisionMask;
+    public LayerMask collisionMask;
     float speed =10;
     float damage =1;
     public float life=2;
     float skinWidth =.1f;
+    public Color trailColor;
 
     // Start is called before the first frame update
     
@@ -18,6 +19,8 @@ public class ProjectTitle : MonoBehaviour
         if (initialCollisions.Length>0){
             OnHitObject(initialCollisions[0], transform.position);
         }
+        GetComponent<TrailRenderer>().material.SetColor("_Color", trailColor);
+
     } 
     public void SetSpeed(float newSpeed){
         speed = newSpeed;

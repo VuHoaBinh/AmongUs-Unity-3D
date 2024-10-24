@@ -29,25 +29,44 @@ public class Enemy : LivingEntity {
 	public ParticleSystem deathEffect;	
 
 
-	protected override void Start () {
-		base.Start ();
+	void Awake() {
 		pathfinder = GetComponent<NavMeshAgent> ();
-		skinMaterial = GetComponent<Renderer> ().material;
-		originalColour = skinMaterial.color;
+		
 
 		if (GameObject.FindGameObjectWithTag ("Player") != null) {
-			currentState = State.Chasing;
 			hasTarget = true;
 
 			target = GameObject.FindGameObjectWithTag ("Player").transform;
 			targetEntity = target.GetComponent<LivingEntity> ();
-			targetEntity.OnDeath += OnTargetDeath;
 
 			myCollisionRadius = GetComponent<CapsuleCollider> ().radius;
 			targetCollisionRadius = target.GetComponent<CapsuleCollider> ().radius;
 
+		}
+	}
+	protected override void Start () {
+		base.Start ();
+
+		if (hasTarget) {
+			currentState = State.Chasing;
+			targetEntity.OnDeath += OnTargetDeath;
 			StartCoroutine (UpdatePath ());
 		}
+	}
+
+	public void SetCharacteristics(float moveSpeed, int hitsToKillPlayer, float enemyHealth, Color skinColour) {
+		
+		pathfinder.speed = moveSpeed;
+		if (hasTarget) {
+			damage = Mathf.Ceil(targetEntity.startingHealth / hitsToKillPlayer);
+		}
+		startingHealth = enemyHealth;
+
+
+		skinMaterial = GetComponent<Renderer> ().material;
+		originalColour = skinMaterial.color;
+		skinMaterial.color = skinColour;
+
 	}
 
 	void OnTargetDeath() {
