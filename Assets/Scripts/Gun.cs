@@ -19,9 +19,19 @@ public class Gun : MonoBehaviour
     bool triggerReleaseSinceLastShot;
     int shotsRemainingInBurst;
 
+    Vector3 recoilSmoothDampVelocity;
+    float recoilAngle;
+    float recoilRotSmoothDampVelocity;
     void Start(){
         muzzleFlash = GetComponent<MuzzleFlash>();
         shotsRemainingInBurst  = burstCount;
+    }
+
+    void LaterUpdate(){
+        // animate recoil
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmoothDampVelocity, .1f);
+        recoilAngle = Mathf.SmoothDamp(recoilAngle, Vector3.zero.x, ref recoilRotSmoothDampVelocity, .1f);
+        transform.localEulerAngles += Vector3.left * recoilAngle;
     }
     void Shoot()
     {
@@ -48,9 +58,16 @@ public class Gun : MonoBehaviour
             }
             Instantiate(shell, shellEjection.position, shellEjection.rotation);
             muzzleFlash.Activate();
+            transform.localPosition = Vector3.forward * .2f;
+            recoilAngle += 5;
+			recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
         }
     }
 
+    public void Aim(Vector3 aimPoint)
+    {
+       transform.LookAt (aimPoint);
+    }
     public void OnTriggerHold(){
         Shoot();
         triggerReleaseSinceLastShot = false;

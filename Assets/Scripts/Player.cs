@@ -38,6 +38,9 @@ public class Player : LivingEntity {
 			controller.LookAt(point);
 			crossHairs.transform.position = point;
 			crossHairs.DetectTargets(ray);
+			if ((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude > 1) {
+				gunController.Aim(point);
+			}
 		}
 
 		// Weapon input
