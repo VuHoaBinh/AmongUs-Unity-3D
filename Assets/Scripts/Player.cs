@@ -5,11 +5,14 @@ using System.Collections;
 [RequireComponent (typeof (GunController))]
 public class Player : LivingEntity {
 
+
 	public float moveSpeed = 5;
 
 	Camera viewCamera;
 	PlayerController controller;
 	GunController gunController;
+
+	public Crosshairs crossHairs;
 	
 	protected override void Start () {
 		base.Start ();
@@ -26,13 +29,15 @@ public class Player : LivingEntity {
 
 		// Look input
 		Ray ray = viewCamera.ScreenPointToRay (Input.mousePosition);
-		Plane groundPlane = new Plane (Vector3.up, Vector3.zero);
+		Plane groundPlane = new Plane (Vector3.up, Vector3.up*gunController.GunHeight);
 		float rayDistance;
 
 		if (groundPlane.Raycast(ray,out rayDistance)) {
 			Vector3 point = ray.GetPoint(rayDistance);
 			//Debug.DrawLine(ray.origin,point,Color.red);
 			controller.LookAt(point);
+			crossHairs.transform.position = point;
+			crossHairs.DetectTargets(ray);
 		}
 
 		// Weapon input
