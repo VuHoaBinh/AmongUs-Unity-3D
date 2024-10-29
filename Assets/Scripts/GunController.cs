@@ -40,9 +40,16 @@ public class GunController : MonoBehaviour
 		}
 	}
 
-	public void Aim(Vector3 aimPoint){
+	public void Aim(Vector3 aimPoint) {
 		if (equippedGun != null) {
 			equippedGun.Aim(aimPoint);
 		}
 	}
+
+	public void Reload() {
+		if (equippedGun != null) {
+			equippedGun.Reload();
+		}
+	}
+
 }
