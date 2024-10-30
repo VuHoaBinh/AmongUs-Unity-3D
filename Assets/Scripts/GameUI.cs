@@ -76,6 +76,6 @@ public class GameUI : MonoBehaviour
 
 	// UI Input
 	public void StartNewGame() {
-		Application.LoadLevel ("Game");
+		Application.LoadLevel ("SampleScene");
 	}
 }

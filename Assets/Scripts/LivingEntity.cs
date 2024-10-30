@@ -29,13 +29,12 @@ public class LivingEntity : MonoBehaviour, IDamageable
         TakeDamage(damage);
     }
 
-    [ContextMenu("Self Destruct")]   
-    protected void Die(){
-        dead = true;
-        if(OnDeath!= null){
-            OnDeath();
-        }
-        GameObject.Destroy(gameObject);
-        
-    }
+    [ContextMenu("Self Destruct")]
+	public virtual void Die() {
+		dead = true;
+		if (OnDeath != null) {
+			OnDeath();
+		}
+		GameObject.Destroy (gameObject);
+	}
 }
