@@ -63,7 +63,7 @@ public class Enemy : LivingEntity {
 		startingHealth = enemyHealth;
 
 
-		skinMaterial = GetComponent<Renderer> ().material;
+		skinMaterial = GetComponent<Renderer> ().sharedMaterial;
 		originalColour = skinMaterial.color;
 		skinMaterial.color = skinColour;
 
