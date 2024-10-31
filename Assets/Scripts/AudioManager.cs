@@ -5,9 +5,9 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public enum AudioChannel{Master, Sfx, Music};
-    float masterVolumePercentage = .2f;
-    float sfxVolumePercentage = 1f;
-    float musicVolumePercentage = 1f;
+    public float masterVolumePercentage {get; private set;}
+    public float sfxVolumePercentage {get; private set;}
+    public float musicVolumePercentage {get; private set;}
 
 
     AudioSource sfx2DSource;
@@ -45,12 +45,15 @@ public class AudioManager : MonoBehaviour
 
 
             audioListener = FindObjectOfType<AudioListener>().transform;
-            playerT = FindObjectOfType<Player>().transform;
+            if(FindObjectOfType<Player>() != null)
+            {
+                playerT = FindObjectOfType<Player>().transform;
+            }
 
 
-            masterVolumePercentage = PlayerPrefs.GetFloat("masterVolume", masterVolumePercentage);
-            sfxVolumePercentage = PlayerPrefs.GetFloat("sfxVolume", sfxVolumePercentage);
-            musicVolumePercentage = PlayerPrefs.GetFloat("musicVolume", musicVolumePercentage);
+            masterVolumePercentage = PlayerPrefs.GetFloat("masterVolume", 1);
+            sfxVolumePercentage = PlayerPrefs.GetFloat("sfxVolume", 1);
+            musicVolumePercentage = PlayerPrefs.GetFloat("musicVolume", 1);
         }
 
     }
@@ -82,9 +85,7 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.SetFloat("masterVolume", masterVolumePercentage);
         PlayerPrefs.SetFloat("sfxVolume", sfxVolumePercentage);
         PlayerPrefs.SetFloat("musicVolume", musicVolumePercentage);
-
-
-
+        PlayerPrefs.Save();
     }
 
 
@@ -114,8 +115,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound2D(string soundName){
         sfx2DSource.PlayOneShot(library.GetClipFromName(soundName), sfxVolumePercentage * masterVolumePercentage);
-
-
     }    
     
     
