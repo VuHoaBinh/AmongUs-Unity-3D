@@ -13,13 +13,13 @@ public class Menu : MonoBehaviour
 
     public Slider[] volumeSliders;
     public Toggle[] resolutionToggles;
+    public Toggle fullscreenToggle;
     public int[] screenWidths;
 
     int activeScreenResIndex;
 
     void Start(){
-        // activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
-        activeScreenResIndex = Mathf.Clamp(PlayerPrefs.GetInt("screen res index"), 0, resolutionToggles.Length - 1);
+        activeScreenResIndex = PlayerPrefs.GetInt ("screen res index");
 
         bool isFullScreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
 
@@ -32,7 +32,7 @@ public class Menu : MonoBehaviour
             resolutionToggles[i].isOn = i == activeScreenResIndex;
         }
 
-        SetFullscreen(isFullScreen);
+        fullscreenToggle.isOn = isFullScreen;
     }
     public void Play(){
 
