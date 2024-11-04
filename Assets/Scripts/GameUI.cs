@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 public class GameUI : MonoBehaviour
 {
    public Image fadePlane;
@@ -11,16 +13,29 @@ public class GameUI : MonoBehaviour
 	public RectTransform newWaveBanner;
 	public TextMeshProUGUI newWaveTitle;
 	public TextMeshProUGUI newWaveEnemyCount;
-
+	public TextMeshProUGUI scoreUI;
+	public TextMeshProUGUI gameOverScoreUI;
 	Spawner spawner;
+	public RectTransform healthBar;
+	Player player;
 
 	void Start () {
-		FindObjectOfType<Player> ().OnDeath += OnGameOver;
+		player = FindObjectOfType<Player>(); 
+		player.OnDeath += OnGameOver;
 	}
 
 	void Awake() {
 		spawner = FindObjectOfType<Spawner> ();
 		spawner.OnNewWave += OnNewWave;
+	}
+
+	void Update() {
+		scoreUI.text = "Your Score:"+ ScoreKeeper.score.ToString ("D6");
+		float healthPercent = 0;
+		if(player != null) {
+			healthPercent = player.health / player.startingHealth;
+		}
+		healthBar.localScale = new Vector3 (healthPercent, 1, 1);
 	}
 
 	void OnNewWave(int waveNumber) {
@@ -34,7 +49,11 @@ public class GameUI : MonoBehaviour
 	}
 		
 	void OnGameOver() {
-		StartCoroutine(Fade (Color.clear, Color.black,1));
+		Cursor.visible = true;
+		StartCoroutine(Fade (Color.clear, new Color(0,0,0,.95f),1));
+		gameOverScoreUI.text = ScoreKeeper.score.ToString ("D6");
+		scoreUI.gameObject.SetActive (false);
+		healthBar.gameObject.SetActive (false);	
 		gameOverUI.SetActive (true);
 	}
 
@@ -76,6 +95,10 @@ public class GameUI : MonoBehaviour
 
 	// UI Input
 	public void StartNewGame() {
-		Application.LoadLevel ("SampleScene");
+		SceneManager.LoadScene ("SampleScene");
+	}
+
+	public void ReturnToMainMenu(){
+		SceneManager.LoadScene ("Menu");
 	}
 }

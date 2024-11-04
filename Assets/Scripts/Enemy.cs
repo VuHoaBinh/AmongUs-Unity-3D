@@ -27,6 +27,7 @@ public class Enemy : LivingEntity {
 
 	// Game effects
 	public ParticleSystem deathEffect;	
+	public static event System.Action OnDeathStatic;
 
 
 	void Awake() {
@@ -61,11 +62,12 @@ public class Enemy : LivingEntity {
 			damage = Mathf.Ceil(targetEntity.startingHealth / hitsToKillPlayer);
 		}
 		startingHealth = enemyHealth;
+		deathEffect.startColor = new Color (skinColour.r, skinColour.g, skinColour.b, 1f);
 
 
-		skinMaterial = GetComponent<Renderer> ().sharedMaterial;
-		originalColour = skinMaterial.color;
+		skinMaterial = GetComponent<Renderer> ().material;
 		skinMaterial.color = skinColour;
+		originalColour = skinMaterial.color;
 
 	}
 
@@ -77,6 +79,9 @@ public class Enemy : LivingEntity {
 	public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {
 		AudioManager.instance.PlaySound ("Impact", transform.position);
 		if (damage >= health) {
+			if (OnDeathStatic != null) {
+				OnDeathStatic();
+			}
 			AudioManager.instance.PlaySound ("Enemy Death", transform.position);
 
 			Destroy(Instantiate (deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward ,hitDirection)) as GameObject, deathEffect.startLifetime);
