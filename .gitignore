@@ -1,58 +1,71 @@
-# Unity Generated Files
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-[Ll]ogs/
-[Mm]emoryCaptures/
+# Thư mục Unity Library (tự động được tạo lại, không cần theo dõi)
+Library/
 
-# Exclude Asset Bundles
-Assets/StreamingAssets/
+# Thư mục Temp (tạm thời, không cần theo dõi)
+Temp/
 
-# User-specific files
+# Thư mục Build (nếu bạn lưu các tệp build riêng, không cần thiết trong source)
+Build/
+
+# Thư mục Obj (các tệp tạm thời từ quá trình build)
+Obj/
+
+# Các tệp UserSettings cá nhân
 UserSettings/
+
+# Logs, cache, metadata và các tệp Unity liên quan
 .vscode/
 *.csproj
-*.unityproj
-*.sln
+*.pidb
 *.suo
-*.tmp
 *.user
 *.userprefs
-*.pidb
+*.unityproj
 *.booproj
 *.svd
 *.pdb
+*.mdb
 *.opendb
 *.VC.db
+sysinfo.txt
 
-# Exclude files created by Unity Cloud Build
-*[Aa]ssets/AssetStoreTools*
+# Tệp phát sinh của Visual Studio / MonoDevelop / Rider
+*.csproj
+*.pidb
+*.sln
+*.suo
+*.user
+*.userprefs
+*.unityproj
+*.booproj
+*.svd
 
-# Mac specific files
-.DS_Store
+# Các tệp tạm thời của Unity
+*.tmp
+*.temp
+*.bak
+*.old
+*.backup
+*.orig
+*.aps
 
-# Windows specific files
-Thumbs.db
-desktop.ini
+# Thư mục tài nguyên tải xuống không cần thiết
+Samples/
+Audio/
+Material/
 
-# JetBrains Rider
-.idea/
-*.sln.iml
+# Các tệp meta tự động tạo bởi Unity
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+*.opendb.meta
 
-# Exclude large or cache files often not necessary for GitHub
-Library/PackageCache/
-Library/ScriptAssemblies/
-Library/ShaderCache/
-Library/Artifacts/
+# Các tệp dựng hình và log của hệ thống
+MemoryCaptures/
+*.log
+Logs/
 
-# Built Game Executables
-*.apk
-*.aab
-*.exe
-*.app
-*.unitypackage
-
-# Exclude Git Large File Storage tracking for unnecessary files if configured
-.gitattributes
+# Firebase và plugin không cần thiết (nếu không dùng)
+Firebase/
+Plugins/
+ExternalDependencyManager/
