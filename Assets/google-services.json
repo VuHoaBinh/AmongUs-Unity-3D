@@ -1,18 +1,24 @@
 {
   "project_info": {
     "project_number": "367324244768",
+    "firebase_url": "https://mygame-binhtom-default-rtdb.firebaseio.com",
     "project_id": "mygame-binhtom",
     "storage_bucket": "mygame-binhtom.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:367324244768:android:4f034dde70cc95f382c545",
+        "mobilesdk_app_id": "1:367324244768:android:d208f7acffb41b7382c545",
         "android_client_info": {
-          "package_name": "com.game1.firebasedb"
+          "package_name": "com.BinhTom.AmongUs"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "367324244768-rs22226vfe1gt1uui5n6f1g5muvb8qdl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCxJHb1R6ohkM2mqJJVpV9bP3MhYRffJCk"
@@ -20,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367324244768-rs22226vfe1gt1uui5n6f1g5muvb8qdl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
