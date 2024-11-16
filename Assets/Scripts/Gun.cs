@@ -8,7 +8,7 @@ public class Gun : MonoBehaviour
     public FireMode fireMode;
     public Transform[] projecttileSpawn;
     public ProjectTitle projectTitle;
-    public float msBetweenShots = 100;
+    public float msBetweenShots = 25;
     public float muzzleVelocity = 35;
     public int burstCount;
     public int projectilePerMag;
