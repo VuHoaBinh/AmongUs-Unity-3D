@@ -307,7 +307,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8174047167847802974}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 32.563}
 --- !u!1 &3889272759401741578
 GameObject:
@@ -604,7 +604,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8174047167847802974}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0.774, z: 0}
 --- !u!1 &5903126800233481149
 GameObject:
@@ -756,8 +756,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireMode: 0
   projecttileSpawn:
-  - {fileID: 7852349347613448203}
-  - {fileID: 8737683325985172482}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 5641119662374417167}
   projectTitle: {fileID: 4387647414400200719, guid: 0e0638757215c8d4a95f6cd52b766810, type: 3}
   msBetweenShots: 100
