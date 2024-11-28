@@ -2547,16 +2547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e504f7e707dc13449fabc0e6d65f0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependencyStatus: 0
-  emailLoginField: {fileID: 70812239}
-  passwordLoginField: {fileID: 669427902}
-  nameRegisterField: {fileID: 279616088}
-  emailRegisterField: {fileID: 2114189793}
-  passwordRegisterField: {fileID: 1019331631}
-  confirmPasswordRegisterField: {fileID: 578199496}
-  LogInHolder: {fileID: 1822646344}
-  SignUpHolder: {fileID: 1636077064}
-  ForgotPasswordHolder: {fileID: 810775351}
 --- !u!4 &547361725
 Transform:
   m_ObjectHideFlags: 0
@@ -3578,7 +3568,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 301, y: 79.100586}
+  m_AnchoredPosition: {x: 519, y: 79.100586}
   m_SizeDelta: {x: 183.7042, y: 50.3678}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &773236385
@@ -4994,9 +4984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52f1f04434839994bbaf7f2d16d9a062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LogInHolder: {fileID: 1822646344}
-  SignUpHolder: {fileID: 1636077064}
-  ForgotPasswordHolder: {fileID: 810775351}
 --- !u!4 &1053964647
 Transform:
   m_ObjectHideFlags: 0
@@ -5713,8 +5700,7 @@ Transform:
   m_LocalPosition: {x: 622.04913, y: 162.24817, z: 1.1397306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1633655584}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6943,8 +6929,8 @@ RectTransform:
   - {fileID: 1822646345}
   - {fileID: 1636077065}
   - {fileID: 810775352}
-  m_Father: {fileID: 1331314406}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
