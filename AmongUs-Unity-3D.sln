@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{448094CB-3214-90DC-2E0D-7EC2B1CEEA96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirebaseMessagingActivityGenerator", "FirebaseMessagingActivityGenerator.csproj", "{0731A5CF-0B27-2608-3F91-3F4EAB4B52D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{448094CB-3214-90DC-2E0D-7EC2B1CEEA96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{448094CB-3214-90DC-2E0D-7EC2B1CEEA96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{448094CB-3214-90DC-2E0D-7EC2B1CEEA96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0731A5CF-0B27-2608-3F91-3F4EAB4B52D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0731A5CF-0B27-2608-3F91-3F4EAB4B52D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0731A5CF-0B27-2608-3F91-3F4EAB4B52D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0731A5CF-0B27-2608-3F91-3F4EAB4B52D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
