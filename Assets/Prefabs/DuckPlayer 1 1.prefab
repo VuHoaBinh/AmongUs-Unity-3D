@@ -794,7 +794,9 @@ GameObject:
   - component: {fileID: 1196202634528637537}
   - component: {fileID: 4682195263057144412}
   - component: {fileID: -8492969289638506819}
-  - component: {fileID: 2453978539017210508}
+  - component: {fileID: 1711369985969330813}
+  - component: {fileID: 240616812410221029}
+  - component: {fileID: 924734876546006303}
   m_Layer: 0
   m_Name: DuckPlayer 1 1
   m_TagString: Player
@@ -810,8 +812,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5910954305711400935}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0019799, y: -2.51, z: 0.11087}
-  m_LocalScale: {x: 0.80201, y: 0.80201, z: 0.80201}
+  m_LocalPosition: {x: -0.0019799, y: -3.4, z: 0.11087}
+  m_LocalScale: {x: 0.7623105, y: 0.7623105, z: 0.7623105}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4581897638120321213}
@@ -827,6 +829,7 @@ Transform:
   - {fileID: 7461607610240017644}
   - {fileID: 3280639485544594473}
   - {fileID: 7573360669229862364}
+  - {fileID: 6909315736344835975}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -875,7 +878,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &4682195263057144412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,7 +910,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &2453978539017210508
+--- !u!114 &1711369985969330813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5910954305711400935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf9051d4aa78474fa8f187ce97c36da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptText: {fileID: 0}
+--- !u!114 &240616812410221029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5910954305711400935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2bc2bb2ef024ef499760b2e41bc46fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponHold: {fileID: 6909315736344835975}
+  allGuns: []
+--- !u!136 &924734876546006303
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -917,10 +947,41 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 1.0117947
+  m_Height: 4.157118
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.5785581, z: -0.51179487}
+--- !u!1 &7288661346661271918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6909315736344835975}
+  m_Layer: 0
+  m_Name: WeaponHold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6909315736344835975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7288661346661271918}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.35000038, y: 1.52, z: 1.91}
+  m_LocalScale: {x: 1.2468671, y: 1.2468671, z: 1.2468671}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7372248547452043611}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7436063852831135930
 GameObject:
   m_ObjectHideFlags: 0

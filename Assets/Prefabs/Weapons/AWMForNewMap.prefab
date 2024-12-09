@@ -333,10 +333,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3427407545584645245}
+  - component: {fileID: 3029174891405769738}
   - component: {fileID: 52701765060412390}
-  - component: {fileID: -8291743005274395877}
   m_Layer: 0
-  m_Name: AWM
+  m_Name: AWMForNewMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,6 +361,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3029174891405769738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650909907286389973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d09c880355f067f4daff582e6a54adac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireMode: 0
+  projecttileSpawn:
+  - {fileID: 3610114176804897832}
+  projectTitle: {fileID: 4387647414400200719, guid: 0e0638757215c8d4a95f6cd52b766810, type: 3}
+  msBetweenShots: 100
+  muzzleVelocity: 35
+  burstCount: 1
+  projectilePerMag: 18
+  reloadTime: 0.3
+  kickMinMax: {x: 0.05, y: 0.2}
+  recoilAngleMinMax: {x: 3, y: 5}
+  recoilMoveSettleSpeed: 0.1
+  recoilRotationSettleSpeed: 0.1
+  shell: {fileID: 6595876428213988718, guid: ff40bbaa6ceffa748a673e403d664886, type: 3}
+  shellEjection: {fileID: 7677299276643807824}
+  shootAudio: {fileID: 8300000, guid: 60e7e1463294a744295b6e44679843a1, type: 3}
+  reloadAudio: {fileID: 8300000, guid: f4179d8e088715d4a96b80c325894c28, type: 3}
 --- !u!114 &52701765060412390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,34 +412,6 @@ MonoBehaviour:
   - {fileID: 4725452402562180796}
   flashHolder: {fileID: 2197406424494396365}
   flashTime: 0.1
---- !u!114 &-8291743005274395877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650909907286389973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae825dc5831ff949976852a533becf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireMode: 0
-  projecttileSpawn: []
-  projectTitle: {fileID: 4387647414400200719, guid: 0e0638757215c8d4a95f6cd52b766810, type: 3}
-  msBetweenShots: 25
-  muzzleVelocity: 35
-  burstCount: 0
-  projectilePerMag: 0
-  reloadTime: 0.5
-  kickMinMax: {x: 0.05, y: 0.2}
-  recoilAngleMinMax: {x: 3, y: 5}
-  recoilMoveSettleSpeed: 0.1
-  recoilRotationSettleSpeed: 0.1
-  shell: {fileID: 6595876428213988718, guid: ff40bbaa6ceffa748a673e403d664886, type: 3}
-  shellEjection: {fileID: 7677299276643807824}
-  shootAudio: {fileID: 8300000, guid: 60e7e1463294a744295b6e44679843a1, type: 3}
-  reloadAudio: {fileID: 8300000, guid: f4179d8e088715d4a96b80c325894c28, type: 3}
 --- !u!1 &1275850293953428206
 GameObject:
   m_ObjectHideFlags: 0
