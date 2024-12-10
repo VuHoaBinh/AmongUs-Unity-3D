@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2652906961346750097}
-  - component: {fileID: 2398262802934329062}
-  - component: {fileID: 863184979446550794}
   m_Layer: 0
   m_Name: LightningGun
   m_TagString: Untagged
@@ -34,64 +32,9 @@ Transform:
   - {fileID: 8825104113680930083}
   - {fileID: 4132103668518737604}
   - {fileID: 7046623613970849980}
-  - {fileID: 3234557552206537421}
-  - {fileID: 2010927834002668992}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2398262802934329062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 164912240443352633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d09c880355f067f4daff582e6a54adac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireMode: 0
-  projecttileSpawn:
-  - {fileID: 4132103668518737604}
-  - {fileID: 3234557552206537421}
-  - {fileID: 2010927834002668992}
-  projectTitle: {fileID: 4387647414400200719, guid: 0e0638757215c8d4a95f6cd52b766810, type: 3}
-  msBetweenShots: 100
-  muzzleVelocity: 35
-  burstCount: 3
-  projectilePerMag: 18
-  reloadTime: 0.3
-  kickMinMax: {x: 0.05, y: 0.2}
-  recoilAngleMinMax: {x: 3, y: 5}
-  recoilMoveSettleSpeed: 0.1
-  recoilRotationSettleSpeed: 0.1
-  shell: {fileID: 6595876428213988718, guid: ff40bbaa6ceffa748a673e403d664886, type: 3}
-  shellEjection: {fileID: 7046623613970849980}
-  shootAudio: {fileID: 8300000, guid: a98af978c93187742b429469fb65d3cb, type: 3}
-  reloadAudio: {fileID: 8300000, guid: 55a6b09169656d641904269af4855b71, type: 3}
---- !u!114 &863184979446550794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 164912240443352633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a0c4237c2d216346a9f8a963d0ff600, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashSprites:
-  - {fileID: -2102099713, guid: d2f2cd6ffc39c1944bf51bd893259a1d, type: 3}
-  - {fileID: -1363217301, guid: d2f2cd6ffc39c1944bf51bd893259a1d, type: 3}
-  - {fileID: 1362639754, guid: d2f2cd6ffc39c1944bf51bd893259a1d, type: 3}
-  - {fileID: -1718237674, guid: d2f2cd6ffc39c1944bf51bd893259a1d, type: 3}
-  flashRenderers:
-  - {fileID: 5699307915499696654}
-  - {fileID: 5392409916891149392}
-  flashHolder: {fileID: 1531043912381972769}
-  flashTime: 0.1
 --- !u!1 &644226938965358617
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,37 +136,6 @@ Transform:
   m_Father: {fileID: 2652906961346750097}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2010927834002668999
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2010927834002668992}
-  m_Layer: 0
-  m_Name: ProjectTitleSpawner03
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2010927834002668992
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010927834002668999}
-  m_LocalRotation: {x: -0, y: 0.0067537446, z: -0, w: 0.99997723}
-  m_LocalPosition: {x: -0.023000717, y: 0, z: 0.54400015}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2652906961346750097}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0.774, z: 0}
 --- !u!1 &2326244573617167593
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,37 +220,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2349792352136604896
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3234557552206537421}
-  m_Layer: 0
-  m_Name: ProjectTitleSpawner02
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3234557552206537421
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2349792352136604896}
-  m_LocalRotation: {x: -0, y: 0.06301819, z: -0, w: 0.9980124}
-  m_LocalPosition: {x: 0.069999695, y: 0, z: 0.54400015}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2652906961346750097}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 7.226, z: 0}
 --- !u!1 &4243422993898989436
 GameObject:
   m_ObjectHideFlags: 0

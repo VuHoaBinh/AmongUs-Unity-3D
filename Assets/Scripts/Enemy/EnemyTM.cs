@@ -8,6 +8,10 @@ public class EnemyTM : LivingEntity {
 	public enum State {Idle, Chasing, Attacking};
 	State currentState;
 
+    public Transform projectileSpawn; 
+    public ProjectTitle projectTitle;
+    public float muzzleVelocity = 10;
+
 	NavMeshAgent pathfinder;
 	Transform target;
 	LivingEntity targetEntity;
@@ -91,48 +95,34 @@ public class EnemyTM : LivingEntity {
 	void Update () {
 
 		if (hasTarget) {
-			if (Time.time > nextAttackTime) {
-				float sqrDstToTarget = (target.position - transform.position).sqrMagnitude;
-				if (sqrDstToTarget < Mathf.Pow (attackDistanceThreshold + myCollisionRadius + targetCollisionRadius, 2)) {
-					nextAttackTime = Time.time + timeBetweenAttacks;
-					// AudioManager.instance.PlaySound ("Enemy Attack", transform.position);
+            if (Time.time > nextAttackTime) {
+                Vector3 directionToTarget = (target.position - transform.position).normalized;
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-					StartCoroutine (Attack ());
-				}
-
-			}
-		}
-
+                if (Physics.Raycast(transform.position, directionToTarget, out RaycastHit hit, distanceToTarget)) {
+                    Debug.DrawLine(transform.position, hit.point, Color.red, 1f); // Hiển thị đường raycast
+                    if (hit.collider.transform == target) {
+                        nextAttackTime = Time.time + timeBetweenAttacks;
+                        StartCoroutine(Attack());
+                    }
+                }
+            }
+        }
 	}
+
+    void Shoot() {
+        Vector3 shootDirection = (target.position - projectileSpawn.position).normalized;
+        ProjectTitle newProjectile = Instantiate(projectTitle, projectileSpawn.position, Quaternion.LookRotation(shootDirection)) as ProjectTitle;
+        newProjectile.SetSpeed(muzzleVelocity);
+    }
 
 	IEnumerator Attack() {
 
 		currentState = State.Attacking;
 		pathfinder.enabled = false;
 
-		Vector3 originalPosition = transform.position;
-		Vector3 dirToTarget = (target.position - transform.position).normalized;
-		Vector3 attackPosition = target.position - dirToTarget * (myCollisionRadius);
-
-		float attackSpeed = 3;
-		float percent = 0;
-
-		// skinMaterial.color = Color.red;
-		bool hasAppliedDamage = false;
-
-		while (percent <= 1) {
-
-			if (percent >= .5f && !hasAppliedDamage) {
-				hasAppliedDamage = true;
-				// targetEntity.TakeDamage(damage);
-			}
-
-			percent += Time.deltaTime * attackSpeed;
-			float interpolation = (-Mathf.Pow(percent,2) + percent) * 4;
-			transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
-
-			yield return null;
-		}
+		Shoot();
+        yield return new WaitForSeconds(timeBetweenAttacks);
 
 		// skinMaterial.color = originalColour;
 		currentState = State.Chasing;
