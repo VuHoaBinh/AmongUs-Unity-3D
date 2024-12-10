@@ -11,6 +11,7 @@ public class EnemyTM : LivingEntity {
     public Transform projectileSpawn; 
     public ProjectTitle projectTitle;
     public float muzzleVelocity = 10;
+    public HealthBar healthBar;
 
 	NavMeshAgent pathfinder;
 	Transform target;
@@ -36,7 +37,7 @@ public class EnemyTM : LivingEntity {
 
 	void Awake() {
 		pathfinder = GetComponent<NavMeshAgent> ();
-		
+		healthBar = GetComponent<HealthBar>();
 
 		if (GameObject.FindGameObjectWithTag ("Player") != null) {
 			hasTarget = true;
@@ -90,7 +91,11 @@ public class EnemyTM : LivingEntity {
 
 			Destroy(Instantiate (deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward ,hitDirection)) as GameObject, deathEffect.startLifetime);
 		}
+        
+        
+        
 		base.TakeHit (damage, hitPoint, hitDirection);
+        healthBar.TakeDamage(damage);
 	}
 	void Update () {
 
@@ -100,7 +105,7 @@ public class EnemyTM : LivingEntity {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
                 if (Physics.Raycast(transform.position, directionToTarget, out RaycastHit hit, distanceToTarget)) {
-                    Debug.DrawLine(transform.position, hit.point, Color.red, 1f); // Hiển thị đường raycast
+                    Debug.DrawLine(transform.position, hit.point, Color.red, 1f); 
                     if (hit.collider.transform == target) {
                         nextAttackTime = Time.time + timeBetweenAttacks;
                         StartCoroutine(Attack());
@@ -116,6 +121,8 @@ public class EnemyTM : LivingEntity {
         newProjectile.SetSpeed(muzzleVelocity);
     }
 
+
+
 	IEnumerator Attack() {
 
 		currentState = State.Attacking;
@@ -128,6 +135,7 @@ public class EnemyTM : LivingEntity {
 		currentState = State.Chasing;
 		pathfinder.enabled = true;
 	}
+
 
 	IEnumerator UpdatePath() {
 		float refreshRate = .25f;
