@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime; // Cần thiết để sử dụng RoomOptions và TypedLobby
+using Photon.Realtime;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-    public GameObject player; // Prefab nhân vật
+    public GameObject player; 
     [Space]
-    public Transform spawnerPoint; // Vị trí spawn nhân vật
+    public Transform spawnerPoint; 
 
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Connecting ...");
@@ -21,8 +20,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnConnectedToMaster();
         Debug.Log("Connected to Server successfully - Binh dep trai");
-
-        // Tham gia lobby sau khi kết nối thành công
         PhotonNetwork.JoinLobby();
     }
 
@@ -31,10 +28,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
         base.OnJoinedLobby();
         Debug.Log("Joined Lobby!");
 
-        // Tạo hoặc tham gia phòng
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 4; // Giới hạn số người chơi trong phòng
-        PhotonNetwork.JoinOrCreateRoom("test", roomOptions, TypedLobby.Default);
+        // // Tạo hoặc tham gia phòng
+        // RoomOptions roomOptions = new RoomOptions();
+        // roomOptions.MaxPlayers = 4; // Giới hạn số người chơi trong phòng
+        // PhotonNetwork.JoinOrCreateRoom("test", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("test", null, null);
+
     }
 
     public override void OnJoinedRoom()
@@ -42,15 +41,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         Debug.Log("Joined Room Successfully!");
 
-        // Spawn nhân vật khi vào phòng
-        if (player != null && spawnerPoint != null)
-        {
-            PhotonNetwork.Instantiate(player.name, spawnerPoint.position, Quaternion.identity);
-            Debug.Log("Player spawned successfully!");
-        }
-        else
-        {
-            Debug.LogError("Player prefab or spawn point is not set!");
-        }
+        GameObject _player = PhotonNetwork.Instantiate(player.name, spawnerPoint.position, Quaternion.identity);
+        _player.GetComponent<PlayerSetup>().IsLocalPlayer();
     }
 }
+ 
