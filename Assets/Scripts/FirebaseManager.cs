@@ -96,7 +96,7 @@ public class FirebaseManager : MonoBehaviour
         {
             user = loginTask.Result.User;
             Debug.LogFormat("{0} You Are Successfully Logged In", user.DisplayName);
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("Option");
         }
     }
 
