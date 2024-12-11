@@ -597,7 +597,6 @@ GameObject:
   - component: {fileID: 4504786604254347803}
   - component: {fileID: 4504786604254347804}
   - component: {fileID: 2465127504432442885}
-  - component: {fileID: 7507266267795079337}
   m_Layer: 3
   m_Name: DuckEnemyBoxing
   m_TagString: Untagged
@@ -717,20 +716,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7507266267795079337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4504786604254347807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6d0304ebbabaa4aa8b2cf43c97c5cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 10
-  deathEffect: {fileID: 8254585647366324146, guid: d32fc0d52b273ae489652b6c54ecf4de, type: 3}
 --- !u!1 &5348075887517613454
 GameObject:
   m_ObjectHideFlags: 0
