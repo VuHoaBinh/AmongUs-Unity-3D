@@ -96,6 +96,7 @@ public class FirebaseManager : MonoBehaviour
         {
             user = loginTask.Result.User;
             Debug.LogFormat("{0} You Are Successfully Logged In", user.DisplayName);
+            PlayerPrefs.SetString("PlayerName", user.DisplayName);
             SceneManager.LoadScene("Option");
         }
     }
@@ -148,6 +149,7 @@ public class FirebaseManager : MonoBehaviour
             else
             {
                 Debug.Log("Registration Successful! Welcome " + user.DisplayName);
+                PlayerPrefs.SetString("PlayerName", user.DisplayName);
                 LogInHolder.SetActive(true);
                 SignUpHolder.SetActive(false);
                 ForgotPasswordHolder.SetActive(false);
