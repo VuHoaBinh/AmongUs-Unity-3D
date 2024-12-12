@@ -2,36 +2,112 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
+
 
 public class Weapon : MonoBehaviour
 {
-    public int damage; // Sát thương của vũ khí
-    public Camera camera; // Camera để xác định hướng bắn
-    public float fireRate; // Tốc độ bắn
-    private float nextFire;
+    public int damage;
+    public Camera camera;
+    public float fireRate;
 
     [Header("VFX")]
-    public GameObject hitVFX; // Hiệu ứng khi bắn trúng
+    public GameObject hitVFX;
+    private float nextFire;
 
+    [Header("Ammo")]
+
+    public int mag = 5;
+    public int ammo = 30;
+    public int magAmmo = 30;
+
+    [Header("UI")]
+    public TextMeshProUGUI magText;
+    public TextMeshProUGUI ammoText;
+
+    [Header("Animation")]
+    public Animation animation;
+    public AnimationClip reload;
+
+
+    [Header("Recoil Settings")]
+    // [Range(0, 1)]
+    // public float recoilPercent = 0.3f;
+    [Range(0, 2)]
+    public float recoverPercent = 0.7f;
+
+    [Space]
+    public float recoilUp = 0f;
+    public float recoilBack = 1f;
+
+    private Vector3 originalPosition;
+    private Vector3 recoilVelocity = Vector3.zero;
+
+    private float recoilLength;
+    private float recoverLength;
+    private bool recoiling;
+    public bool recovering;
+    void Start()
+    {
+        magText.text = mag.ToString();
+        ammoText.text = ammo + "/" + magAmmo;
+
+        originalPosition = transform.localPosition;
+
+        recoilLength = 0;
+        recoverLength = 1 / fireRate * recoverPercent;
+
+    }
     void Update()
     {
-        // Giảm thời gian đợi giữa các lần bắn
         if (nextFire > 0)
         {
             nextFire -= Time.deltaTime;
         }
 
-        // Kiểm tra nếu chuột trái được nhấn và thời gian giữa các lần bắn đã đủ
-        if (Input.GetMouseButton(0) && nextFire <= 0) // 0 là nút chuột trái
+        if (Input.GetMouseButton(0) && nextFire <= 0 && ammo > 0 && animation.isPlaying == false) 
         {
             nextFire = 1 / fireRate;
+            ammo--;
+            magText.text = mag.ToString();
+            ammoText.text = ammo + "/" + magAmmo;
             Fire();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && mag > 0)
+        {
+            Reload();
+        }
+
+        if (recoiling)
+        {
+            Recoil();
+        }
+
+        if (recovering)
+        {
+            Recover();
         }
     }
 
+    void Reload()
+    {
+        animation.Play(reload.name);
+        if (mag > 0)
+        {
+            mag--;
+            ammo = magAmmo;
+        }
+        magText.text = mag.ToString();
+        ammoText.text = ammo + "/" + magAmmo;
+
+    }
     void Fire()
     {
-        // Tạo ray từ camera hướng về phía trước
+
+        recoiling = true;
+        recovering = false;
+
         if (camera == null)
         {
             Debug.LogError("Camera chưa được gán!");
@@ -43,19 +119,39 @@ public class Weapon : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f))
         {
-            // Tạo hiệu ứng trúng mục tiêu
             if (hitVFX != null)
             {
                 PhotonNetwork.Instantiate(hitVFX.name, hit.point, Quaternion.identity);
             }
 
-            // Gây sát thương nếu mục tiêu có thành phần Health
             var health = hit.transform.gameObject.GetComponent<Health>();
             var photonView = hit.transform.gameObject.GetComponent<PhotonView>();
             if (health != null && photonView != null)
             {
                 photonView.RPC("TakeDamage", RpcTarget.All, damage);
             }
+        }
+    }
+
+    void Recoil()
+    {
+        Vector3 finalPosition = new Vector3(originalPosition.x, originalPosition.y + recoilUp, originalPosition.z - recoilBack);
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, finalPosition, ref recoilVelocity, recoilLength);
+        if (transform.localPosition == finalPosition)
+        {
+            recoiling = false;
+            recovering = true;
+        }
+    }
+
+    void Recover()
+    {
+        Vector3 finalPosition = originalPosition;
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, finalPosition, ref recoilVelocity, recoverLength);
+        if (transform.localPosition == finalPosition)
+        {
+            recoiling = false;
+            recovering = false;
         }
     }
 }
