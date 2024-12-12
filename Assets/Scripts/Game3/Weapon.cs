@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
-
+using Photon.Pun.UtilityScripts;
 
 public class Weapon : MonoBehaviour
 {
@@ -65,7 +65,7 @@ public class Weapon : MonoBehaviour
             nextFire -= Time.deltaTime;
         }
 
-        if (Input.GetMouseButton(0) && nextFire <= 0 && ammo > 0 && animation.isPlaying == false) 
+        if (Input.GetMouseButton(0) && nextFire <= 0 && ammo > 0 && animation.isPlaying == false)
         {
             nextFire = 1 / fireRate;
             ammo--;
@@ -116,19 +116,31 @@ public class Weapon : MonoBehaviour
 
         Ray ray = new Ray(camera.transform.position, camera.transform.forward);
         RaycastHit hit;
+        PhotonNetwork.LocalPlayer.AddScore(1);
 
         if (Physics.Raycast(ray, out hit, 100f))
         {
+            PhotonNetwork.LocalPlayer.AddScore(damage);
+
             if (hitVFX != null)
             {
                 PhotonNetwork.Instantiate(hitVFX.name, hit.point, Quaternion.identity);
             }
 
             var health = hit.transform.gameObject.GetComponent<Health>();
-            var photonView = hit.transform.gameObject.GetComponent<PhotonView>();
-            if (health != null && photonView != null)
+            if (health != null)
             {
-                photonView.RPC("TakeDamage", RpcTarget.All, damage);
+                var photonView = hit.transform.gameObject.GetComponent<PhotonView>();
+                if (photonView != null)
+                {
+                    photonView.RPC("TakeDamage", RpcTarget.All, damage);
+                    if (damage >= health.health && RoomManager.instance != null)
+                    {
+                        RoomManager.instance.kills++;
+                        RoomManager.instance.SetHashes();
+                        PhotonNetwork.LocalPlayer.AddScore(100);
+                    }
+                }
             }
         }
     }

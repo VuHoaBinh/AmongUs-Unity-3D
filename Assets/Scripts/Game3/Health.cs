@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     public int health;
     public bool IsLocalPlayer;
     public TextMeshProUGUI healthText;
+
     public void TakeDamage(int _damage)
     {
         health -= _damage;
@@ -18,6 +19,8 @@ public class Health : MonoBehaviour
             {
 
                 RoomManager.instance.RespawnPlayer();
+                RoomManager.instance.deaths++;
+                RoomManager.instance.SetHashes();
             }
             Destroy(gameObject);
         }

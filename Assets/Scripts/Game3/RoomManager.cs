@@ -5,12 +5,13 @@ using Photon.Pun;
 using Photon.Realtime;
 using Firebase;
 using Firebase.Auth;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager instance;
     public GameObject player;
     [Space]
-    public Transform spawnerPoint;
+    public Transform[] spawnerPoints;
 
     private bool playerSpawned = false; // Add this flag
     [Space]
@@ -22,49 +23,62 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     private string nickname = "BinhTom";
     private FirebaseManager firebaseManager;
+
+    [HideInInspector]
+    public int kills = 0;
+    [HideInInspector]
+    public int deaths = 0;
+    public string roomNameToJoin = "test";
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Ensure the RoomManager persists across scenes
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        instance = this;
     }
-    void Start()
+
+    public void changeNickName(string _name)
     {
-        Debug.Log("Connecting ...");
+        nickname = _name;
+    }
+
+    public void JoinRoomButtonPressed()
+    {
         PhotonNetwork.ConnectUsingSettings();
-        nickname = PlayerPrefs.GetString("PlayerName", nickname); // Lấy giá trị name đã lưu trữ
-        Debug.Log("Nickname loaded: " + nickname); // Thêm dòng này để kiểm tra
-        firebaseManager = FindObjectOfType<FirebaseManager>();
-        if (firebaseManager != null && firebaseManager.user != null)
-        {
-            nickname = firebaseManager.user.DisplayName; // Lấy giá trị name từ FirebaseManager
-            Debug.Log("Nickname loaded: " + nickname); // Thêm dòng này để kiểm tra
-        }
-        else
-        {
-            Debug.LogError("FirebaseManager or user is not initialized!");
-        }
-    }
+        PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
 
-    public override void OnConnectedToMaster()
-    {
-        base.OnConnectedToMaster();
-        Debug.Log("Connected to Server successfully - Binh dep trai");
-        PhotonNetwork.JoinLobby();
+        nameUI.SetActive(false);
+        connectingUI.SetActive(true);
     }
+    // void Start()
+    // {
+    //     Debug.Log("Connecting ...");
+    //     PhotonNetwork.ConnectUsingSettings();
+    //     nickname = PlayerPrefs.GetString("PlayerName", nickname); // Lấy giá trị name đã lưu trữ
+    //     Debug.Log("Nickname loaded: " + nickname); // Thêm dòng này để kiểm tra
+    //     firebaseManager = FindObjectOfType<FirebaseManager>();
+    //     if (firebaseManager != null && firebaseManager.user != null)
+    //     {
+    //         nickname = firebaseManager.user.DisplayName; // Lấy giá trị name từ FirebaseManager
+    //         Debug.Log("Nickname loaded: " + nickname); // Thêm dòng này để kiểm tra
+    //         PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
+    //     }
+    //     else
+    //     {
+    //         Debug.LogError("FirebaseManager or user is not initialized!");
+    //     }
+    // }
 
-    public override void OnJoinedLobby()
-    {
-        base.OnJoinedLobby();
-        Debug.Log("Joined Lobby!");
-        PhotonNetwork.JoinOrCreateRoom("test", null, null);
-    }
+    // public override void OnConnectedToMaster()
+    // {
+    //     base.OnConnectedToMaster();
+    //     Debug.Log("Connected to Server successfully - Binh dep trai");
+    //     PhotonNetwork.JoinLobby();
+    // }
+
+    // public override void OnJoinedLobby()
+    // {
+    //     base.OnJoinedLobby();
+    //     Debug.Log("Joined Lobby!");
+    //     PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
+    // }
 
     public override void OnJoinedRoom()
     {
@@ -86,19 +100,32 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void RespawnPlayer()
     {
-        if (!playerSpawned)
-        {
-            Debug.Log("Spawning player...");
-            GameObject _player = PhotonNetwork.Instantiate(player.name, spawnerPoint.position, Quaternion.identity);
-            _player.GetComponent<PlayerSetup>().IsLocalPlayer();
-            _player.GetComponent<Health>().IsLocalPlayer = true;
-            _player.GetComponent<PhotonView>().RPC("SetNickName", RpcTarget.All, nickname);
+        Transform spawnerPoint = spawnerPoints[UnityEngine.Random.Range(0, spawnerPoints.Length)];
 
-            playerSpawned = true;
-        }
-        else
+        GameObject _player = PhotonNetwork.Instantiate(player.name, spawnerPoint.position, Quaternion.identity);
+        _player.GetComponent<PlayerSetup>().IsLocalPlayer();
+        _player.GetComponent<Health>().IsLocalPlayer = true;
+        _player.GetComponent<PhotonView>().RPC("SetNickName", RpcTarget.AllBuffered, nickname);
+        PhotonNetwork.LocalPlayer.NickName = nickname;
+
+        playerSpawned = true;
+
+    }
+
+    public void SetHashes()
+    {
+        try
         {
-            Debug.Log("Player already spawned, not spawning again.");
+            Hashtable hash = PhotonNetwork.LocalPlayer.CustomProperties;
+            hash["kills"] = kills;
+            hash["deaths"] = deaths;
+
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+
+        }
+        catch
+        {
+
         }
     }
 }
