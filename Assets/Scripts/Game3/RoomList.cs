@@ -19,14 +19,16 @@ public class RoomList : MonoBehaviourPunCallbacks
 
     private List<RoomInfo> cachedRoomList = new List<RoomInfo>();
 
-    public void ChangeRoomToCreateName(string _nameRoom){
-        
+    public void ChangeRoomToCreateName(string _nameRoom)
+    {
+
         roomManager.roomNameToJoin = _nameRoom;
         Debug.Log("1" + _nameRoom);
         Debug.Log("1" + roomManager.roomNameToJoin);
 
     }
-    private void Awake(){
+    private void Awake()
+    {
         Instance = this;
     }
     IEnumerator Start()
@@ -49,24 +51,31 @@ public class RoomList : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        foreach (var room in roomList)
+        if (cachedRoomList.Count <= 0)
         {
-            int index = cachedRoomList.FindIndex(r => r.Name == room.Name);
-            if (room.RemovedFromList)
+            cachedRoomList = roomList;
+        }
+        else
+        {
+
+            foreach (var room in roomList)
             {
-                if (index != -1)
-                    cachedRoomList.RemoveAt(index);
-            }
-            else
-            {
-                if (index == -1)
-                    cachedRoomList.Add(room); // Thêm phòng mới
-                else
-                    cachedRoomList[index] = room; // Cập nhật phòng hiện tại
+                for (int i =0 ; i< cachedRoomList.Count;i++){
+                    if(cachedRoomList[i].Name == room.Name){
+                        List<RoomInfo> newList = cachedRoomList;
+                        if(room.RemovedFromList){
+                            newList.Remove(newList[i]);
+                        }else{
+                            newList[i] = room;
+                        }
+
+                        cachedRoomList = newList;
+                    }
+                }
             }
         }
 
-        UpdateUI(); // Cập nhật giao diện sau mỗi thay đổi
+        UpdateUI(); 
     }
 
     void UpdateUI()
@@ -87,7 +96,8 @@ public class RoomList : MonoBehaviourPunCallbacks
         }
     }
 
-    public void JoinRoomByName(string _name){
+    public void JoinRoomByName(string _name)
+    {
         // roomManager.roomNameToJoin = _name;
         roomManagerGameObject.SetActive(true);
         gameObject.SetActive(false);

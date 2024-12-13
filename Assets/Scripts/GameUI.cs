@@ -99,6 +99,6 @@ public class GameUI : MonoBehaviour
 	}
 
 	public void ReturnToMainMenu(){
-		SceneManager.LoadScene ("Menu");
+		SceneManager.LoadScene ("OptionMap");
 	}
 }

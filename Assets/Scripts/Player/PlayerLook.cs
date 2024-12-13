@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerLook : MonoBehaviour
 {
     public Camera cam;
@@ -20,4 +20,10 @@ public class PlayerLook : MonoBehaviour
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
     }
 
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene("Option");
+        }
+    }
 }
