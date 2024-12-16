@@ -41,10 +41,11 @@ This project is a simple multiplayer First-Person Shooter (FPS) game with basic 
 2. Create a Firebase project and configure it for authentication.
 3. Set up a Photon account and create a new Photon project.
 
+
 ### How to Play:
 1. Clone the repository:
    ```bash
-   git clone <repository-link>
+   git clone https://github.com/VuHoaBinh/BTB-Tom-Game-Unity-3D.git
    ```
 2. Open the project in Unity.
 3. Configure Firebase and Photon settings:
