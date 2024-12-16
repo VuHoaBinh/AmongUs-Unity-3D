@@ -1,6 +1,6 @@
-# Welcome to My Multiplayer FPS Game 🎮
+# Welcome to My Game 🎮
 
-This project is a simple multiplayer First-Person Shooter (FPS) game with basic features. It’s designed to showcase fundamental concepts of multiplayer game development using Photon Server and Firebase for authentication. The game is built in Unity using C# and features a 3D environment.
+This project is a simple multiplayer BTB-Tom game with basic features. It’s designed to showcase fundamental concepts of multiplayer game development using Photon Server and Firebase for authentication. The game is built in Unity using C# and features a 3D environment.
 
 ---
 
